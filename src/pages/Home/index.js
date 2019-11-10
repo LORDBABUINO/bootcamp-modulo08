@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 
 import { Container } from './styles'
 
@@ -21,6 +21,8 @@ export default function Home() {
     localStorage.setItem('techs', JSON.stringify(techs))
   }, [techs])
 
+  const techSize = useMemo(() => techs.length, [techs])
+
   return (
     <>
       <Container>
@@ -28,6 +30,8 @@ export default function Home() {
           <li key={tech}>{tech}</li>
         ))}
       </Container>
+      <strong>Você tem {techSize} tecnologias</strong>
+      <br />
       <input
         type="text"
         onChange={({ target: { value } }) => setNewTech(value)}
