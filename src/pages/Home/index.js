@@ -1,14 +1,16 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useCallback } from 'react'
 
 import { Container } from './styles'
 
 export default function Home() {
   const [techs, setTechs] = useState([])
   const [newTech, setNewTech] = useState([''])
-  const handleAdd = () => {
+
+  const handleAdd = useCallback(() => {
     setTechs([...techs, newTech])
     setNewTech('')
-  }
+  }, [newTech, techs])
+
   useEffect(() => {
     const storageTechs = localStorage.getItem('techs')
 
